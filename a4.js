@@ -1,52 +1,52 @@
-const fs = require("fs");
+const fs = require("fs")
 
-const input = fs.readFileSync("./a4.txt", "utf8");
+const input = fs.readFileSync("./a4.txt", "utf8")
 
 const isValidPassport = (requiredFields, passport) => {
   for (const requiredField of requiredFields) {
-    let contains = false;
+    let contains = false
     for (const passportField of Object.keys(passport)) {
-      if (passportField === requiredField) contains = true;
+      if (passportField === requiredField) contains = true
     }
-    if (!contains) return false;
+    if (!contains) return false
   }
   for (const [key, value] of Object.entries(passport)) {
     switch (key) {
       case "byr": {
-        const birthyear = Number(value);
-        if (birthyear > 2002 || birthyear < 1920) return false;
-        break;
+        const birthyear = Number(value)
+        if (birthyear > 2002 || birthyear < 1920) return false
+        break
       }
       case "iyr": {
-        const issueYear = Number(value);
-        if (issueYear > 2020 || issueYear < 2010) return false;
-        break;
+        const issueYear = Number(value)
+        if (issueYear > 2020 || issueYear < 2010) return false
+        break
       }
       case "eyr": {
-        const expirationYear = Number(value);
+        const expirationYear = Number(value)
         if (expirationYear < 2020 || expirationYear > 2030)
-          return false;
-        break;
+          return false
+        break
       }
       case "hgt": {
-        let height = value;
+        let height = value
         if (height.includes("cm")) {
-          height = Number(height.replace("cm", ""));
-          if (height < 150 || height > 193) return false;
+          height = Number(height.replace("cm", ""))
+          if (height < 150 || height > 193) return false
         } else if (height.includes("in")) {
-          height = Number(height.replace("in", ""));
-          if (height < 59 || height > 76) return false;
-        } else return false;
-        break;
+          height = Number(height.replace("in", ""))
+          if (height < 59 || height > 76) return false
+        } else return false
+        break
       }
       case "hcl": {
-        let hairColor = value;
-        if (!hairColor.match(/^#[0-9a-f]{6,6}$/i)) return false;
-        break;
+        const hairColor = value
+        if (!hairColor.match(/^#[0-9a-f]{6,6}$/i)) return false
+        break
       }
 
       case "ecl": {
-        let eyeColor = value;
+        const eyeColor = value
         if (
           eyeColor !== "amb" &&
           eyeColor !== "blu" &&
@@ -56,32 +56,32 @@ const isValidPassport = (requiredFields, passport) => {
           eyeColor !== "hzl" &&
           eyeColor !== "oth"
         )
-          return false;
-        break;
+          return false
+        break
       }
 
       case "pid": {
-        let passportId = value;
-        if (passportId.length !== 9) return false;
-        break;
+        const passportId = value
+        if (passportId.length !== 9) return false
+        break
       }
     }
   }
-  return true;
-};
+  return true
+}
 
 const passports = input
   .split("\r\n\r\n")
   .map((passport) => passport.replace(/(\r\n|\r|\n)/g, " "))
   .map((passport) => {
-    const keyValuePairs = passport.split(" ");
-    const newPassport = {};
+    const keyValuePairs = passport.split(" ")
+    const newPassport = {}
     keyValuePairs.forEach((pair) => {
-      const splitPair = pair.split(":");
-      newPassport[splitPair[0]] = splitPair[1];
-    });
-    return newPassport;
-  });
+      const splitPair = pair.split(":")
+      newPassport[splitPair[0]] = splitPair[1]
+    })
+    return newPassport
+  })
 
 const requiredFields = [
   "byr",
@@ -91,10 +91,10 @@ const requiredFields = [
   "hcl",
   "ecl",
   "pid",
-];
+]
 
 const validPassports = passports.filter((passport) =>
   isValidPassport(requiredFields, passport),
-);
+)
 
-console.log(validPassports.length);
+console.log(validPassports.length)

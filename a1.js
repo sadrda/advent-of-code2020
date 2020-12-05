@@ -1,8 +1,8 @@
-const fs = require("fs");
+const fs = require("fs")
 
-const input = fs.readFileSync("./a1.txt", "utf8");
+const input = fs.readFileSync("./a1.txt", "utf8")
 
-const nums = input.split("\n").map((entry) => Number(entry));
+const nums = input.split("\n").map((entry) => Number(entry))
 
 nums.forEach((firstNumber) => {
   nums.forEach((secondNumber) => {
@@ -13,7 +13,7 @@ nums.forEach((firstNumber) => {
         thirdNumber !== firstNumber &&
         firstNumber + secondNumber + thirdNumber === 2020
       )
-        console.log(firstNumber * secondNumber * thirdNumber);
-    });
-  });
-});
+        console.log(firstNumber * secondNumber * thirdNumber)
+    })
+  })
+})

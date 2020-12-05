@@ -1,19 +1,19 @@
-const fs = require("fs");
+const fs = require("fs")
 
-const input = fs.readFileSync("./a2.txt", "utf8");
+const input = fs.readFileSync("./a2.txt", "utf8")
 
 const commands = input.split("\r\n").map((line) => {
-  const splitLine = line.split(" ");
-  const occurs = splitLine[0].split("-");
+  const splitLine = line.split(" ")
+  const occurs = splitLine[0].split("-")
   return {
     firstIndex: occurs[0] - 1,
     secondIndex: occurs[1] - 1,
     char: splitLine[1][0],
     password: splitLine[2],
-  };
-});
+  }
+})
 
-let validPasswords = 0;
+let validPasswords = 0
 commands.forEach((command) => {
   if (
     (command.password[command.firstIndex] === command.char ||
@@ -21,7 +21,7 @@ commands.forEach((command) => {
     command.password[command.firstIndex] !==
       command.password[command.secondIndex]
   ) {
-    validPasswords++;
+    validPasswords++
   }
-});
-console.log(validPasswords);
+})
+console.log(validPasswords)
