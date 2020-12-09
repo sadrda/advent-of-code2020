@@ -23,7 +23,6 @@ for (
   } else if (commands[commandIndex][0] === "nop") {
     copyCommands[commandIndex][0] = "jmp"
   }
-  //console.log(copyCommands)
   while (true) {
     const currentCommand = copyCommands[globalIndex]
     if (checkedCommandIndices.find((index) => index === globalIndex))
