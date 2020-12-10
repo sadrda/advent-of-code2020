@@ -34,7 +34,6 @@
         "after": true
       }
     ],
-    "prefer-const": "error",
     "no-var": "error",
     "no-console": "warn",
     "prettier/prettier": [
